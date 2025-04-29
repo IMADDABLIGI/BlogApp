@@ -16,7 +16,7 @@ function HomeHead() {
             <NavLink to="/about" className="nav_link">About Us</NavLink>
         </div>
         <div className="head_login">
-            <NavLink to="/signup" className="nav_login"> Login </NavLink>
+			  <NavLink to="/login" className="nav_login"> Login </NavLink>
         </div>
     </div>
   )
