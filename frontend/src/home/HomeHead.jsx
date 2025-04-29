@@ -7,7 +7,7 @@ function HomeHead() {
   return (
     <div className='home_head'>
         <div className="head_logo_name">
-            <img className='head_logo' src={logo}/>
+            <img className='head_logo' src={logo} alt="InnoMinds Logo"/>
             <p className='head_name'> InnoMinds </p>
         </div>
         <div className="head_navbar">

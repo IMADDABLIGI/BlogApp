@@ -1,14 +1,13 @@
-import React from "react";
-import './Home.css';
+import React from 'react'
 
 function Footer() {
-    return (
-        <div className="footer">
-            <div className="footer_content">
-                <p>© 2025 Your Company Name. All rights reserved.</p>
-                <p>Privacy Policy | Terms of Service</p>
-            </div>
-        </div>
-    );
+  return (
+    <div className='footer'>
+      <div className='footer_content'>
+        © 2025 InnoMinds Blogs. All rights reserved.
+      </div>
+    </div>
+  )
 }
-export default Footer;
+
+export default Footer
