@@ -4,9 +4,8 @@ import react from '@vitejs/plugin-react'
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
-  base: '/BlogApp', 
   server: {
     port: 3000,
-   
+    // strictPort: true, // 👈 This makes sure it ONLY uses 3000
   },
 })
