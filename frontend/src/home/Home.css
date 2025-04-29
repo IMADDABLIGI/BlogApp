@@ -1,11 +1,30 @@
 .home_ctr {
     height: 100svh;
     width: 100%;
-    background-color: wheat;
+    background-color: #F7F4ED;
 }
 
 .home_ctr .home_head {
     height: 10%;
     width: 100%;
-    background-color: lightblue;
+    background-color: #F7F4ED;
+}
+
+.footer {
+    position: fixed;
+    color: aqua;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+    background-color: #F7F4ED;
+    font-family: 'Courier New', Courier, monospace;
+    padding: 2px;
+    font-size: 13px;
+}
+.footer_content {
+    height: 10%;
+    width: 100%;
+    background-color: #F7F4ED;
+    color: black;
 }

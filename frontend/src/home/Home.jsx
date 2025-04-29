@@ -1,5 +1,6 @@
 import React, {useState} from 'react'
 import './Home.css'
+import Footer from './footer'
 
 function Home() {
     const [count, setCount] = useState(0)
@@ -10,6 +11,8 @@ function Home() {
       {/* <h1>Welcome to the Home Page</h1>
       <p>This is a simple React application.</p>
       <p>Current count: {count}</p> */}
+       <Footer></Footer>
+  
     </div>
   )
 }
