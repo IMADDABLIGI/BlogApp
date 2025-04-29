@@ -5,6 +5,8 @@
 }
 
 .home_ctr .home_head {
+    display: flex;
+    align-items: center;
     height: 10%;
     width: 100%;
     background-color: #F7F4ED;
@@ -27,4 +29,49 @@
     width: 100%;
     background-color: #F7F4ED;
     color: black;
+box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
+
+.home_ctr .home_head .head_logo_name{
+    display: flex;
+    align-items: center;
+    /* flex-direction: center; */
+    /* border:black 2px solid; */
+    border-radius: 5px;
+    width: 300px;
+    height: 60px;
+    margin-left: 50px;
+}
+
+.home_ctr .home_head .head_logo{
+    margin: 0 10px;
+}
+.home_ctr .home_head .head_name{
+    font-size: 30px;
+    font-weight: bold;
+    color: black;
+    font-family: Courier, monospace;
+}
+
+.home_ctr .home_head .head_navbar{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border:black 2px solid;
+    border-radius: 5px;
+    margin-left: 400px;
+    height: 60px;
+    width: 500px;
+}
+
+.home_ctr .home_head .head_login{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border:black 2px solid;
+    border-radius: 5px;
+    margin-left: 400px;
+    height: 60px;
+    width: 180px;
+}
+

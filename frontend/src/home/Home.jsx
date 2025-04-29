@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import './Home.css'
 import Footer from './footer'
+import HomeHead from './HomeHead'
 
 function Home() {
     const [count, setCount] = useState(0)
@@ -13,6 +14,8 @@ function Home() {
       <p>Current count: {count}</p> */}
        <Footer></Footer>
   
+      <HomeHead />
+      
     </div>
   )
 }
