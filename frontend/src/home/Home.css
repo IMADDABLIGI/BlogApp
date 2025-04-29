@@ -1,5 +1,11 @@
 .home_ctr {
     height: 100svh;
     width: 100%;
-    background-color: aqua;
+    background-color: wheat;
+}
+
+.home_ctr .home_head {
+    height: 10%;
+    width: 100%;
+    background-color: lightblue;
 }
