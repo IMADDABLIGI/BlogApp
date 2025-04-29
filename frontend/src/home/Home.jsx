@@ -2,6 +2,7 @@ import React, {useState} from 'react'
 import './Home.css'
 import Footer from './footer'
 import HomeHead from './HomeHead'
+import HomeBody from './HomeBody'
 
 function Home() {
     const [count, setCount] = useState(0)
@@ -15,6 +16,7 @@ function Home() {
        <Footer></Footer>
   
       <HomeHead />
+      <HomeBody />
       
     </div>
   )
