@@ -1,0 +1,206 @@
+/* Login.css */
+
+/* Main container */
+.login-container {
+	min-height: 100vh;
+	background-color: #f3f4f6;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 1rem;
+}
+
+/* Login card */
+.login-card {
+	max-width: 28rem;
+	width: 100%;
+	background-color: white;
+	border-radius: 0.75rem;
+	box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+	padding: 2rem;
+}
+
+/* Title */
+.login-title {
+	font-size: 1.5rem;
+	font-weight: 700;
+	color: #111827;
+	margin-bottom: 1.5rem;
+	text-align: center;
+}
+
+/* Form */
+.login-form {
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+}
+
+.form-group {
+	margin-bottom: 1rem;
+}
+
+.form-label {
+	display: block;
+	font-size: 0.875rem;
+	font-weight: 500;
+	color: #374151;
+	margin-bottom: 0.25rem;
+}
+
+.form-input {
+	width: 92%;
+	padding: 1rem;
+	border: 1px solid #d1d5db;
+	border-radius: 0.5rem;
+	outline: none;
+	transition: all 0.2s;
+	background-color: white;
+	color: #111827;
+}
+
+.form-input:focus {
+	border-color: #6366f1;
+	box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2);
+}
+
+/* Remember me and forgot password row */
+.form-row {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: 1rem;
+}
+
+.checkbox-label {
+	display: flex;
+	align-items: center;
+}
+
+.checkbox-input {
+	border-radius: 0.25rem;
+	border-color: #d1d5db;
+	color: #6366f1;
+}
+
+.checkbox-input:focus {
+	box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2);
+}
+
+.checkbox-text {
+	margin-left: 0.5rem;
+	font-size: 0.875rem;
+	color: #4b5563;
+}
+
+.forgot-link {
+	font-size: 0.875rem;
+	color: #6366f1;
+	text-decoration: none;
+}
+
+.forgot-link:hover {
+	color: #4f46e5;
+}
+
+/* Sign in button */
+.login-button {
+	width: 100%;
+	background-color: #6366f1;
+	color: white;
+	font-weight: 500;
+	padding: 1rem;
+	border-radius: 0.5rem;
+	border: none;
+	cursor: pointer;
+	transition: background-color 0.2s;
+}
+
+.login-button:hover {
+	background-color: #4f46e5;
+}
+
+/* Sign up prompt */
+.signup-prompt {
+	margin-top: 1.5rem;
+	text-align: center;
+	font-size: 0.875rem;
+	color: #4b5563;
+}
+
+.signup-link {
+	color: #6366f1;
+	text-decoration: none;
+	font-weight: 500;
+}
+
+.signup-link:hover {
+	color: #4f46e5;
+}
+
+/* Add these styles to your SignUp.css file */
+
+/* Error message styling */
+.error-message {
+	color: #e53935;
+	font-size: 0.85rem;
+	margin-top: 0.25rem;
+	display: block;
+}
+
+/* Server error message */
+.server-error {
+	background-color: #ffebee;
+	border: 1px solid #ffcdd2;
+	border-radius: 4px;
+	padding: 12px;
+	margin-bottom: 20px;
+	font-size: 0.95rem;
+}
+
+/* Error state for inputs */
+.input-error {
+	border-color: #e53935 !important;
+	background-color: #fffdfd;
+}
+
+.input-error:focus {
+	box-shadow: 0 0 0 2px rgba(229, 57, 53, 0.1) !important;
+	border-color: #e53935 !important;
+}
+
+/* Error state for checkbox */
+.checkbox-error .checkbox-label {
+	color: #e53935;
+}
+
+/* Disabled button styles */
+.signup-button:disabled {
+	background-color: #9e9e9e;
+	cursor: not-allowed;
+	opacity: 0.7;
+}
+
+/* Password strength indicator (optional) */
+.password-strength {
+	height: 5px;
+	width: 100%;
+	margin-top: 5px;
+	border-radius: 3px;
+	transition: all 0.3s;
+}
+
+.strength-weak {
+	background-color: #e53935;
+	width: 33%;
+}
+
+.strength-medium {
+	background-color: #ffb300;
+	width: 66%;
+}
+
+.strength-strong {
+	background-color: #43a047;
+	width: 100%;
+}
