@@ -101,7 +101,7 @@
 
 .home_body {
     display: flex;
-    height: 80%;
+    height: 70%;
     justify-content: space-between;
     align-items: center;
     padding: 60px 80px;
@@ -144,11 +144,11 @@
 /* Large Desktop (keep original styles) */
 @media (min-width: 1681px) {
     .home_ctr .home_head .head_navbar {
-        margin-left: calc(20% + 100px);
+        margin-left: calc(25% + 100px);
     }
     
     .nav_login {
-        margin-left: calc(15% + 100px);
+        margin-left: calc(25% + 100px);
     }
 }
 
@@ -160,7 +160,7 @@
     }
     
     .nav_login {
-        margin-left: 200px;
+        margin-left: 273px;
     }
 }
 
@@ -172,7 +172,7 @@
     }
     
     .nav_login {
-        margin-left: 100px;
+        margin-left: 300px;
         padding: 12px 25px;
     }
     
@@ -212,7 +212,7 @@
     }
     
     .nav_login {
-        margin-left: 10px;
+        margin-left: 300px;
         padding: 10px 20px;
         font-size: 16px;
     }
@@ -255,7 +255,7 @@
     
     .nav_login {
         order: 2;
-        margin-left: auto;
+        margin-left: 500px;
         margin-right: 0;
     }
     
