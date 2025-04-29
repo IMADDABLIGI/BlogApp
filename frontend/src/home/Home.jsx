@@ -6,9 +6,10 @@ function Home() {
 
   return (
     <div className='home_ctr'>
-      <h1>Welcome to the Home Page</h1>
+      <div className='home_head'></div>
+      {/* <h1>Welcome to the Home Page</h1>
       <p>This is a simple React application.</p>
-      <p>Current count: {count}</p>
+      <p>Current count: {count}</p> */}
     </div>
   )
 }
