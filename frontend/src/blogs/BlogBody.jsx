@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './BlogBody.css';
+import { ThumbsUp, ThumbsDown, User, Briefcase, MessageCircle, AlertCircle, X, Edit, Trash2, Check } from 'lucide-react';
 import avatar from '../assets/avatar.png';
-import { ThumbsUp, ThumbsDown, User, Briefcase, MessageCircle, AlertCircle, X } from 'lucide-react';
 
 const BlogBody = () => {
   // Sample user data (this would come from your backend in a real application)
@@ -15,8 +15,13 @@ const BlogBody = () => {
     articlesCount: 27
   };
 
-  // Sample blog posts (this would come from your backend in a real application)
-  const [articles, setArticles] = useState([
+  // Articles state (this would interact with API in a real application)
+  const [articles, setArticles] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
+  
+  // Sample article data for initial load
+  const sampleArticles = [
     {
       id: 1,
       author: "Alex Johnson",
@@ -30,6 +35,7 @@ const BlogBody = () => {
       dislikes: 5,
       userLiked: false,
       userDisliked: false,
+      ownedByUser: false
     },
     {
       id: 2,
@@ -44,6 +50,7 @@ const BlogBody = () => {
       dislikes: 2,
       userLiked: false,
       userDisliked: false,
+      ownedByUser: false
     },
     {
       id: 3,
@@ -58,8 +65,47 @@ const BlogBody = () => {
       dislikes: 3,
       userLiked: false,
       userDisliked: false,
+      ownedByUser: false
+    },
+    {
+      id: 4,
+      author: userData.name,
+      authorRole: `${userData.position} at ${userData.company}`,
+      authorPic: userData.profilePic,
+      date: "April 29, 2025",
+      category: "Success Story",
+      title: "My Journey to Building a Tech Startup",
+      content: "Starting InnoTech Solutions was one of the most challenging yet rewarding experiences of my career. I wanted to share some insights from my journey that might help fellow entrepreneurs...",
+      likes: 42,
+      dislikes: 0,
+      userLiked: false,
+      userDisliked: false,
+      ownedByUser: true
     }
-  ]);
+  ];
+  
+  // Load initial articles (simulating API fetch)
+  useEffect(() => {
+    // Simulate API fetch delay
+    const fetchArticles = async () => {
+      try {
+        // This is where you would make your API call
+        // const response = await fetch('/api/articles');
+        // const data = await response.json();
+        
+        // Simulating API response delay
+        setTimeout(() => {
+          setArticles(sampleArticles);
+          setIsLoading(false);
+        }, 500);
+      } catch (err) {
+        setError("Failed to load articles. Please try again later.");
+        setIsLoading(false);
+      }
+    };
+    
+    fetchArticles();
+  }, []);
 
   // Handle like/dislike functionality
   const handleReaction = (id, reaction) => {
@@ -100,9 +146,15 @@ const BlogBody = () => {
       }
       return article;
     }));
+    
+    // This is where you would call your API to update the reaction
+    // Example: await fetch(`/api/articles/${id}/reaction`, { 
+    //   method: 'POST', 
+    //   body: JSON.stringify({ reaction }) 
+    // });
   };
   
-  // Handle input changes for the article creation form
+  // Handle input changes for the article creation/editing form
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setNewArticle({
@@ -111,59 +163,150 @@ const BlogBody = () => {
     });
   };
   
-  // Submit new article
-  const handleArticleSubmit = (e) => {
+  // Open edit form for an article
+  const handleEditArticle = (article) => {
+    setArticleToEdit(article);
+    setNewArticle({
+      title: article.title,
+      content: article.content,
+      category: article.category
+    });
+    setIsEditing(true);
+    setShowArticleForm(true);
+  };
+  
+  // Prepare to delete an article
+  const handleDeletePrompt = (article) => {
+    setArticleToDelete(article);
+    setShowDeleteConfirm(true);
+  };
+  
+  // Confirm and delete an article
+  const confirmDelete = () => {
+    if (articleToDelete) {
+      // Filter out the article to delete
+      setArticles(articles.filter(article => article.id !== articleToDelete.id));
+      
+      // This is where you would call your API to delete the article
+      // Example: await fetch(`/api/articles/${articleToDelete.id}`, { method: 'DELETE' });
+      
+      setShowDeleteConfirm(false);
+      setArticleToDelete(null);
+    }
+  };
+  
+  // Cancel article deletion
+  const cancelDelete = () => {
+    setShowDeleteConfirm(false);
+    setArticleToDelete(null);
+  };
+  
+  // Submit new or updated article
+  const handleArticleSubmit = async (e) => {
     e.preventDefault();
     
-    // Create new article object
-    const articleToAdd = {
-      id: articles.length + 1,
-      author: userData.name,
-      authorRole: userData.position + " at " + userData.company,
-      authorPic: userData.profilePic,
-      date: new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }),
-      category: newArticle.category,
-      title: newArticle.title,
-      content: newArticle.content,
-      likes: 0,
-      dislikes: 0,
-      userLiked: false,
-      userDisliked: false
-    };
-    
-    // Add the new article to the state
-    setArticles([articleToAdd, ...articles]);
-    
-    // Reset form and close it
+    try {
+      if (isEditing && articleToEdit) {
+        // Update existing article
+        const updatedArticles = articles.map(article => {
+          if (article.id === articleToEdit.id) {
+            return {
+              ...article,
+              title: newArticle.title,
+              content: newArticle.content,
+              category: newArticle.category,
+              // Add an "edited" flag or timestamp if desired
+              lastEdited: new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })
+            };
+          }
+          return article;
+        });
+        
+        setArticles(updatedArticles);
+        
+        // This is where you would call your API to update the article
+        // Example: await fetch(`/api/articles/${articleToEdit.id}`, { 
+        //   method: 'PUT',
+        //   body: JSON.stringify(newArticle) 
+        // });
+      } else {
+        // Create new article object
+        const articleToAdd = {
+          id: Date.now(), // Temporary ID, would be assigned by backend
+          author: userData.name,
+          authorRole: userData.position + " at " + userData.company,
+          authorPic: userData.profilePic,
+          date: new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }),
+          category: newArticle.category,
+          title: newArticle.title,
+          content: newArticle.content,
+          likes: 0,
+          dislikes: 0,
+          userLiked: false,
+          userDisliked: false,
+          ownedByUser: true
+        };
+        
+        // Add the new article to the state
+        setArticles([articleToAdd, ...articles]);
+        
+        // This is where you would call your API to create the article
+        // Example: await fetch('/api/articles', { 
+        //   method: 'POST',
+        //   body: JSON.stringify(articleToAdd) 
+        // });
+        
+        // Update user's article count (this would typically be handled by the backend)
+        userData.articlesCount += 1;
+      }
+      
+      // Reset form and close it
+      resetForm();
+    } catch (err) {
+      console.error("Error saving article:", err);
+      // Handle error, show notification, etc.
+    }
+  };
+  
+  // Reset and close form
+  const resetForm = () => {
     setNewArticle({
       title: '',
       content: '',
       category: 'Success Story'
     });
     setShowArticleForm(false);
+    setIsEditing(false);
+    setArticleToEdit(null);
   };
 
   // Categories for filtering (would be expanded in a real application)
   const categories = ["All", "Success Story", "Challenge", "Lesson Learned", "Advice"];
   const [activeCategory, setActiveCategory] = useState("All");
   
-  // State for article creation form
+  // State for article creation/editing form
   const [showArticleForm, setShowArticleForm] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
+  const [articleToEdit, setArticleToEdit] = useState(null);
   const [newArticle, setNewArticle] = useState({
     title: '',
     content: '',
     category: 'Success Story'
   });
+  
+  // State for delete confirmation modal
+  const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
+  const [articleToDelete, setArticleToDelete] = useState(null);
 
   return (
     <div className="blog-body-container">
-      {/* Article Creation Form Modal */}
+      {/* Article Creation/Editing Form Modal */}
       {showArticleForm && (
         <div className="article-form-overlay">
           <div className="article-form-container">
             <div className="form-header">
-              <h2>Share Your Experience</h2>
-              <button className="close-form-btn" onClick={() => setShowArticleForm(false)}>
+              <h2>{isEditing ? 'Edit Article' : 'Share Your Experience'}</h2>
+              <button className="close-form-btn" onClick={resetForm}>
                 <X size={24} />
               </button>
             </div>
@@ -210,8 +353,24 @@ const BlogBody = () => {
                 ></textarea>
               </div>
               
-              <button type="submit" className="submit-article-btn">Publish</button>
+              <button type="submit" className="submit-article-btn">
+                {isEditing ? 'Update' : 'Publish'}
+              </button>
             </form>
+          </div>
+        </div>
+      )}
+      
+      {/* Delete Confirmation Modal */}
+      {showDeleteConfirm && (
+        <div className="delete-confirm-overlay">
+          <div className="delete-confirm-container">
+            <h3>Delete Article</h3>
+            <p>Are you sure you want to delete this article? This action cannot be undone.</p>
+            <div className="delete-actions">
+              <button className="cancel-btn" onClick={cancelDelete}>Cancel</button>
+              <button className="delete-btn" onClick={confirmDelete}>Delete</button>
+            </div>
           </div>
         </div>
       )}
@@ -278,39 +437,85 @@ const BlogBody = () => {
         </div>
         
         <div className="articles-list">
-          {articles
-            .filter(article => activeCategory === "All" || article.category === activeCategory)
-            .map(article => (
-              <article key={article.id} className="blog-card">
-                <div className="article-header">
-                  <img src={avatar} alt={article.author} className="author-pic" />
-                  <div className="article-meta">
-                    <h3 className="author-name">{article.author}</h3>
-                    <p className="author-role">{article.authorRole}</p>
-                    <span className="article-date">{article.date}</span>
+          {isLoading ? (
+            <div className="loading-container">
+              <div className="loading-spinner"></div>
+              <p>Loading articles...</p>
+            </div>
+          ) : error ? (
+            <div className="error-container">
+              <p className="error-message">{error}</p>
+              <button className="retry-btn" onClick={() => window.location.reload()}>
+                Retry
+              </button>
+            </div>
+          ) : articles.length === 0 ? (
+            <div className="no-articles">
+              <p>No articles found. Be the first to share your experience!</p>
+              <button className="create-post-btn" onClick={() => setShowArticleForm(true)}>
+                Share Your Experience
+              </button>
+            </div>
+          ) : (
+            articles
+              .filter(article => activeCategory === "All" || article.category === activeCategory)
+              .map(article => (
+                <article key={article.id} className="blog-card">
+                  <div className="article-header">
+                    <img src={avatar} alt={article.author} className="author-pic" />
+                    <div className="article-meta">
+                      <h3 className="author-name">{article.author}</h3>
+                      <p className="author-role">{article.authorRole}</p>
+                      <span className="article-date">{article.date}</span>
+                      {article.lastEdited && (
+                        <span className="article-edited">(edited {article.lastEdited})</span>
+                      )}
+                    </div>
+                    <span className="article-category">{article.category}</span>
                   </div>
-                  <span className="article-category">{article.category}</span>
-                </div>
-                
-                <h2 className="article-title">{article.title}</h2>
-                <p className="article-content">{article.content}</p>
-                
-                <div className="article-actions">
-                  <button 
-                    className={`reaction-btn ${article.userLiked ? 'active' : ''}`}
-                    onClick={() => handleReaction(article.id, 'like')}
-                  >
-                    <ThumbsUp size={18} /> <span>{article.likes}</span>
-                  </button>
-                  <button 
-                    className={`reaction-btn ${article.userDisliked ? 'active' : ''}`}
-                    onClick={() => handleReaction(article.id, 'dislike')}
-                  >
-                    <ThumbsDown size={18} /> <span>{article.dislikes}</span>
-                  </button>
-                </div>
-              </article>
-            ))}
+                  
+                  <h2 className="article-title">{article.title}</h2>
+                  <p className="article-content">{article.content}</p>
+                  
+                  <div className="article-actions">
+                    <div className="reaction-actions">
+                      <button 
+                        className={`reaction-btn ${article.userLiked ? 'active' : ''}`}
+                        onClick={() => handleReaction(article.id, 'like')}
+                      >
+                        <ThumbsUp size={18} /> <span>{article.likes}</span>
+                      </button>
+                      <button 
+                        className={`reaction-btn ${article.userDisliked ? 'active' : ''}`}
+                        onClick={() => handleReaction(article.id, 'dislike')}
+                      >
+                        <ThumbsDown size={18} /> <span>{article.dislikes}</span>
+                      </button>
+                    </div>
+                    
+                    {/* Edit/Delete options for articles owned by the user */}
+                    {article.ownedByUser && (
+                      <div className="owner-actions">
+                        <button 
+                          className="edit-btn"
+                          onClick={() => handleEditArticle(article)}
+                          title="Edit article"
+                        >
+                          <Edit size={18} />
+                        </button>
+                        <button 
+                          className="delete-btn"
+                          onClick={() => handleDeletePrompt(article)}
+                          title="Delete article"
+                        >
+                          <Trash2 size={18} />
+                        </button>
+                      </div>
+                    )}
+                  </div>
+                </article>
+              ))
+          )}
         </div>
       </div>
     </div>
