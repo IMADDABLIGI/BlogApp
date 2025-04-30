@@ -3,17 +3,21 @@ import './BlogBody.css';
 import { ThumbsUp, ThumbsDown, User, Briefcase, MessageCircle, AlertCircle, X, Edit, Trash2, Check } from 'lucide-react';
 import avatar from '../assets/avatar.png';
 
-const BlogBody = () => {
+const BlogBody = (props) => {
   // Sample user data (this would come from your backend in a real application)
+  const userDat = props.userDat;
   const userData = {
     name: "Jane Doe",
-    profilePic: "/api/placeholder/80/80",
     position: "Tech Founder",
     company: "InnoTech Solutions",
     followers: 342,
     following: 156,
     articlesCount: 27
   };
+
+  useEffect(() => {
+    console.log("User data:", userDat);
+  }, []);
 
   // Articles state (this would interact with API in a real application)
   const [articles, setArticles] = useState([]);

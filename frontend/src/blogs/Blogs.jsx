@@ -17,17 +17,27 @@ function Blogs() {
       navigate('/login');
       return;
     }
-
+  
     try {
       const decoded = jwtDecode(token);
       const currentTime = Date.now() / 1000;
-
+  
       if (decoded.exp < currentTime) {
         localStorage.removeItem('token');
         navigate('/login');
       } else {
-        setUserData(decoded); // ✅ save decoded token in state
-        console.log("Decoded token data:", decoded); // ✅ log token content
+        
+        const userData = {
+          name: `${decoded.first_name} ${decoded.last_name}`,
+          position: "Tech Founder", 
+          company: "InnoTech Solutions",
+          followers: 342,
+          following: 156,
+          articlesCount: 27
+        };
+  
+        setUserData(userData);
+        console.log("User data:", userData);
       }
     } catch (err) {
       console.error("Invalid token format:", err);
@@ -39,7 +49,7 @@ function Blogs() {
   return (
     <div className='blogs_ctr'>
         <HomeHead isAuthenticated={true} />
-        <BlogBody />
+        <BlogBody userDat={userData} />
     </div>
   )
 }
