@@ -69,7 +69,7 @@
     color: #222;
     font-weight: bold;
     font-size: 18px;
-    margin: 0 20px;
+    margin: 0 20px 0 0;
     transition: all 0.3s ease;
 }
   
@@ -92,7 +92,7 @@
     text-decoration: none;
     border-radius: 8px;
     transition: all 0.3s ease;
-    margin-left: 500px;
+    margin-left: 400px;
 }
   
 .nav_login:hover {
@@ -162,7 +162,7 @@
     }
     
     .nav_login {
-        margin-left: 273px;
+        margin-left: 180px;
     }
 }
 
