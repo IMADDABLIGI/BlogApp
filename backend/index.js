@@ -9,7 +9,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-connectDB(); // Call the function
+connectDB();
 
 app.use("/api/auth", authRoutes);
 
