@@ -4,6 +4,8 @@ import Home from "./home/Home";
 import Login from "./login/Login";
 import Register from "./login/Register";
 import { useState ,useEffect} from "react";
+import About from "./about/About";
+import Blogs from "./blogs/Blogs";
 
 const router = createBrowserRouter([
   {
@@ -17,6 +19,14 @@ const router = createBrowserRouter([
   {
 	path: "/register",
 	  element: <Register />
+  },
+  {
+	path: "/blogs",
+	  element: <Blogs />
+  },
+  {
+	path: "/about",
+	  element: <About />
   },
 ]);
 

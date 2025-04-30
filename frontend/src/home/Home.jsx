@@ -7,7 +7,7 @@ import HomeBody from './HomeBody'
 function Home() {
   return (
     <div className='home_ctr'>
-      <HomeHead />
+      <HomeHead isAuthenticated={false} />
       <HomeBody />
       <Footer />
     </div>
