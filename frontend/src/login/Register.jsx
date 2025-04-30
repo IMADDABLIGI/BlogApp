@@ -1,9 +1,12 @@
 // SignUp.jsx
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import './Register.css';
 
 export default function Register() {
+
+	const navigate = useNavigate(); // ✅ Initialize
 	// Form state
 	const [formData, setFormData] = useState({
 		firstName: '',
@@ -11,8 +14,10 @@ export default function Register() {
 		email: '',
 		password: '',
 		confirmPassword: '',
-		agreeToTerms: false
+		// agreeToTerms: false
 	});
+
+	const [message, setMessage] = useState('');
 
 	// Error state
 	const [errors, setErrors] = useState({
@@ -21,7 +26,7 @@ export default function Register() {
 		email: '',
 		password: '',
 		confirmPassword: '',
-		agreeToTerms: '',
+		// agreeToTerms: '',
 		server: '' // For server-side errors
 	});
 
@@ -57,11 +62,17 @@ export default function Register() {
 		if (!formData.firstName.trim()) {
 			newErrors.firstName = 'First name is required';
 			isValid = false;
+		} else if (formData.firstName.length < 3) {
+			newErrors.firstName = 'firstName must be at least 3 characters';
+			isValid = false;
 		}
 
 		// Last name validation
 		if (!formData.lastName.trim()) {
 			newErrors.lastName = 'Last name is required';
+			isValid = false;
+		} else if (formData.lastName.length < 3) {
+			newErrors.lastName = 'LastName must be at least 3 characters';
 			isValid = false;
 		}
 
@@ -89,11 +100,11 @@ export default function Register() {
 			isValid = false;
 		}
 
-		// Terms agreement validation
-		if (!formData.agreeToTerms) {
-			newErrors.agreeToTerms = 'You must agree to the terms';
-			isValid = false;
-		}
+		//! Terms agreement validation
+		// if (!formData.agreeToTerms) {
+		// 	newErrors.agreeToTerms = 'You must agree to the terms';
+		// 	isValid = false;
+		// }
 
 		setErrors(newErrors);
 		return isValid;
@@ -112,30 +123,29 @@ export default function Register() {
 		try {
 			setIsLoading(true);
 
-			// Simulate API call
-			await new Promise(resolve => setTimeout(resolve, 1000));
+			const response = await fetch('http://localhost:5000/api/auth/signup', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify({ "first_name": formData.firstName, "last_name": formData.lastName, "email": formData.email, "password" :formData.password }),
+			});
+			// Handle successful signup
+			const data = await response.json();
 
-			// For demonstration purposes, simulating an email already exists error
-			if (formData.email === 'test@example.com') {
-				throw new Error('Email already exists');
+			if (response.ok) {
+				setMessage('Login successful!');
+				console.log('Register success:', data);
+				// Example: store token in localStorage or redirect
+				localStorage.setItem('token', data.token);
+				// ✅ Redirect to /nav
+				navigate('/login');
+			} else {
+				setMessage(`Login failed: ${data.message || 'Unknown error'}`);
+				console.error("error message ", message);
 			}
 
-			// Handle successful signup
-			console.log('Form submitted successfully:', formData);
 
-			// Reset form after successful submission
-			setFormData({
-				firstName: '',
-				lastName: '',
-				email: '',
-				password: '',
-				confirmPassword: '',
-				agreeToTerms: false
-			});
-			setIsSubmitted(false);
-
-			// Navigate to success page or login
-			// navigate('/login');
 
 		} catch (error) {
 			// Handle server errors
