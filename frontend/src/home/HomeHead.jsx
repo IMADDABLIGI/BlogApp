@@ -16,6 +16,7 @@ function HomeHead(props) {
             <NavLink to="/" className="nav_link" end>Home</NavLink>
             <NavLink to="/blogs" className="nav_link">Blogs</NavLink>
             <NavLink to="/about" className="nav_link">About Us</NavLink>
+            <NavLink to="/contact" className="nav_link">Contact Us</NavLink>
         </div>
         <div className="head_login">
           {!isAuthenticated && 
