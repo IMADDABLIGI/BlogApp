@@ -6,9 +6,12 @@ import pp from '/pp.PNG'
 import imad from '/imad.jpg'
 import koko from '/koko.jpg'
 import han from '/han.jpg'
+import HomeHead from '../home/HomeHead';
+
 function About() {
   return (
     <div>
+      <HomeHead />
       <section className="about-section">
         <div className="about-banner-wrapper">
           <img src={aboutimg} alt="Team working" className="about-banner" />
