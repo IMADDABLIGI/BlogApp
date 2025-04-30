@@ -3,7 +3,9 @@ import './Home.css'
 import logo from '../assets/InnoMindsBlogs.png'
 import { NavLink } from 'react-router-dom';
 
-function HomeHead() {
+function HomeHead(props) {
+  const isAuthenticated = props.isAuthenticated;
+
   return (
     <div className='home_head'>
         <div className="head_logo_name">
@@ -16,7 +18,8 @@ function HomeHead() {
             <NavLink to="/about" className="nav_link">About Us</NavLink>
         </div>
         <div className="head_login">
-			  <NavLink to="/login" className="nav_login"> Login </NavLink>
+          {!isAuthenticated && 
+			     <NavLink to="/login" className="nav_login"> Login </NavLink> }
         </div>
     </div>
   )
