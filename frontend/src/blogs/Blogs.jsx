@@ -26,7 +26,7 @@ function Blogs() {
         localStorage.removeItem('token');
         navigate('/login');
       } else {
-        console.log("Token is valid");
+        // console.log("Token is valid");
       }
     } catch (err) {
       console.error("Invalid token format:", err);
