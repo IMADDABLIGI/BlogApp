@@ -1,9 +1,12 @@
 import React from "react";
 import "./Contact.css";
 import { Mail, Phone, MapPin } from "lucide-react";
+import HomeHead from "../home/HomeHead";
 
 const ContactUs = () => {
   return (
+    <div>
+      <HomeHead />
     <section className="contact-section">
       <div className="contact-container">
         {/* Colonne gauche : Infos de contact */}
@@ -44,6 +47,7 @@ const ContactUs = () => {
         </div>
       </div>
     </section>
+    </div>
   );
 };
 
