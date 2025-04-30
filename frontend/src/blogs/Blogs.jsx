@@ -5,7 +5,7 @@ import BlogBody from './BlogBody'
 function Blogs() {
   return (
     <div className='blogs_ctr'>
-        <HomeHead />
+        <HomeHead isAuthenticated={true} />
         <BlogBody />
     </div>
   )
