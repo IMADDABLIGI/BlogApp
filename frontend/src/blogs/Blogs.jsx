@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-// import jwtDecode from 'jwt-decode';
 import { jwtDecode } from 'jwt-decode';
 
 
@@ -9,7 +8,7 @@ import BlogBody from './BlogBody'
 
 function Blogs() {
   const navigate = useNavigate();
-  const [userData, setUserData] = useState(null); // ✅ store decoded data
+  const [userData, setUserData] = useState(null); 
   
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -37,7 +36,7 @@ function Blogs() {
         };
   
         setUserData(userData);
-        console.log("User data:", userData);
+        // console.log("User data:", userData);
       }
     } catch (err) {
       console.error("Invalid token format:", err);
@@ -49,7 +48,7 @@ function Blogs() {
   return (
     <div className='blogs_ctr'>
         <HomeHead isAuthenticated={true} />
-        <BlogBody userDat={userData} />
+        <BlogBody userData={userData} />
     </div>
   )
 }

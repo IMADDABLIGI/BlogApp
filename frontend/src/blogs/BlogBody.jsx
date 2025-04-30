@@ -2,22 +2,19 @@ import React, { useState, useEffect } from 'react';
 import './BlogBody.css';
 import { ThumbsUp, ThumbsDown, User, Briefcase, MessageCircle, AlertCircle, X, Edit, Trash2, Check } from 'lucide-react';
 import avatar from '../assets/avatar.png';
+import sampleArticles from '../data/articles'; // Sample articles data
 
 const BlogBody = (props) => {
   // Sample user data (this would come from your backend in a real application)
-  const userDat = props.userDat;
-  const userData = {
-    name: "Jane Doe",
-    position: "Tech Founder",
-    company: "InnoTech Solutions",
-    followers: 342,
-    following: 156,
-    articlesCount: 27
-  };
-
-  useEffect(() => {
-    console.log("User data:", userDat);
-  }, []);
+  const userData = props.userData;
+  // const userData = {
+  //   name: "Jane Doe",
+  //   position: "Tech Founder",
+  //   company: "InnoTech Solutions",
+  //   followers: 342,
+  //   following: 156,
+  //   articlesCount: 27
+  // };
 
   // Articles state (this would interact with API in a real application)
   const [articles, setArticles] = useState([]);
@@ -25,79 +22,13 @@ const BlogBody = (props) => {
   const [error, setError] = useState(null);
   
   // Sample article data for initial load
-  const sampleArticles = [
-    {
-      id: 1,
-      author: "Alex Johnson",
-      authorRole: "CEO at StartUp Ventures",
-      authorPic: "/api/placeholder/48/48",
-      date: "April 28, 2025",
-      category: "Success Story",
-      title: "How We Pivoted Our Business Model During The Pandemic",
-      content: "When the pandemic hit, our face-to-face consulting business was devastated. We had to quickly adapt to survive. This is how we transformed our business into a fully digital platform and ended up reaching 3x more clients than before...",
-      likes: 124,
-      dislikes: 5,
-      userLiked: false,
-      userDisliked: false,
-      ownedByUser: false
-    },
-    {
-      id: 2,
-      author: "Sarah Miller",
-      authorRole: "Founder at EcoStartup",
-      authorPic: "/api/placeholder/48/48",
-      date: "April 25, 2025",
-      category: "Challenge",
-      title: "Seeking Advice: Scaling Manufacturing While Staying Sustainable",
-      content: "Our eco-friendly product line has gained traction faster than expected. We're now facing challenges with scaling our manufacturing while maintaining our sustainability commitments. Has anyone navigated this successfully? I'm specifically struggling with finding suppliers that can handle our volume while meeting our ecological standards...",
-      likes: 87,
-      dislikes: 2,
-      userLiked: false,
-      userDisliked: false,
-      ownedByUser: false
-    },
-    {
-      id: 3,
-      author: "Michael Tran",
-      authorRole: "CTO at DataFlow",
-      authorPic: "/api/placeholder/48/48",
-      date: "April 23, 2025",
-      category: "Lesson Learned",
-      title: "The Costly Mistake of Neglecting Technical Debt",
-      content: "Three years into our startup journey, we faced a complete system overhaul because we consistently prioritized new features over addressing our growing technical debt. Here's what happened and what we learned...",
-      likes: 215,
-      dislikes: 3,
-      userLiked: false,
-      userDisliked: false,
-      ownedByUser: false
-    },
-    {
-      id: 4,
-      author: userData.name,
-      authorRole: `${userData.position} at ${userData.company}`,
-      authorPic: userData.profilePic,
-      date: "April 29, 2025",
-      category: "Success Story",
-      title: "My Journey to Building a Tech Startup",
-      content: "Starting InnoTech Solutions was one of the most challenging yet rewarding experiences of my career. I wanted to share some insights from my journey that might help fellow entrepreneurs...",
-      likes: 42,
-      dislikes: 0,
-      userLiked: false,
-      userDisliked: false,
-      ownedByUser: true
-    }
-  ];
+  
   
   // Load initial articles (simulating API fetch)
   useEffect(() => {
     // Simulate API fetch delay
     const fetchArticles = async () => {
       try {
-        // This is where you would make your API call
-        // const response = await fetch('/api/articles');
-        // const data = await response.json();
-        
-        // Simulating API response delay
         setTimeout(() => {
           setArticles(sampleArticles);
           setIsLoading(false);
@@ -151,11 +82,7 @@ const BlogBody = (props) => {
       return article;
     }));
     
-    // This is where you would call your API to update the reaction
-    // Example: await fetch(`/api/articles/${id}/reaction`, { 
-    //   method: 'POST', 
-    //   body: JSON.stringify({ reaction }) 
-    // });
+
   };
   
   // Handle input changes for the article creation/editing form
@@ -191,8 +118,6 @@ const BlogBody = (props) => {
       // Filter out the article to delete
       setArticles(articles.filter(article => article.id !== articleToDelete.id));
       
-      // This is where you would call your API to delete the article
-      // Example: await fetch(`/api/articles/${articleToDelete.id}`, { method: 'DELETE' });
       
       setShowDeleteConfirm(false);
       setArticleToDelete(null);
@@ -228,18 +153,13 @@ const BlogBody = (props) => {
         
         setArticles(updatedArticles);
         
-        // This is where you would call your API to update the article
-        // Example: await fetch(`/api/articles/${articleToEdit.id}`, { 
-        //   method: 'PUT',
-        //   body: JSON.stringify(newArticle) 
-        // });
       } else {
         // Create new article object
         const articleToAdd = {
           id: Date.now(), // Temporary ID, would be assigned by backend
-          author: userData.name,
-          authorRole: userData.position + " at " + userData.company,
-          authorPic: userData.profilePic,
+          author: userData?.name,
+          authorRole: userData?.position + " at " + userData?.company,
+          authorPic: userData?.profilePic,
           date: new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }),
           category: newArticle.category,
           title: newArticle.title,
@@ -253,15 +173,6 @@ const BlogBody = (props) => {
         
         // Add the new article to the state
         setArticles([articleToAdd, ...articles]);
-        
-        // This is where you would call your API to create the article
-        // Example: await fetch('/api/articles', { 
-        //   method: 'POST',
-        //   body: JSON.stringify(articleToAdd) 
-        // });
-        
-        // Update user's article count (this would typically be handled by the backend)
-        userData.articlesCount += 1;
       }
       
       // Reset form and close it
@@ -384,25 +295,25 @@ const BlogBody = (props) => {
         <div className="profile-card">
           <div className="profile-header">
             <img src={avatar} alt="Profile" className="profile-pic" />
-            <h2 className="user-name">{userData.name}</h2>
-            <p className="user-position">{userData.position}</p>
+            <h2 className="user-name">{userData?.name}</h2>
+            <p className="user-position">{userData?.position}</p>
             <div className="company-info">
               <Briefcase size={16} />
-              <span>{userData.company}</span>
+              <span>{userData?.company}</span>
             </div>
           </div>
           
           <div className="profile-stats">
             <div className="stat">
-              <span className="stat-number">{userData.followers}</span>
+              <span className="stat-number">{userData?.followers}</span>
               <span className="stat-label">Followers</span>
             </div>
             <div className="stat">
-              <span className="stat-number">{userData.following}</span>
+              <span className="stat-number">{userData?.following}</span>
               <span className="stat-label">Following</span>
             </div>
             <div className="stat">
-              <span className="stat-number">{userData.articlesCount}</span>
+              <span className="stat-number">{userData?.articlesCount}</span>
               <span className="stat-label">Articles</span>
             </div>
           </div>
