@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 // import jwtDecode from 'jwt-decode';
 import { jwtDecode } from 'jwt-decode';
 
@@ -9,6 +9,7 @@ import BlogBody from './BlogBody'
 
 function Blogs() {
   const navigate = useNavigate();
+  const [userData, setUserData] = useState(null); // ✅ store decoded data
   
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -22,19 +23,19 @@ function Blogs() {
       const currentTime = Date.now() / 1000;
 
       if (decoded.exp < currentTime) {
-        // console.log("Token expired");
         localStorage.removeItem('token');
         navigate('/login');
       } else {
-        // console.log("Token is valid");
+        setUserData(decoded); // ✅ save decoded token in state
+        console.log("Decoded token data:", decoded); // ✅ log token content
       }
     } catch (err) {
       console.error("Invalid token format:", err);
       localStorage.removeItem('token');
       navigate('/login');
     }
-  }, [])
-
+  }, []);
+  
   return (
     <div className='blogs_ctr'>
         <HomeHead isAuthenticated={true} />
