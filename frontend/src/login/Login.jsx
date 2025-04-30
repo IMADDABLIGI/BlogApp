@@ -23,7 +23,6 @@ export default function Login() {
 			});
 
 			const data = await response.json();
-
 			if (response.ok) {
 				setMessage('Login successful!');
 				console.log('Login success:', data);
@@ -45,7 +44,7 @@ export default function Login() {
 			<div className="login-card">
 				<h2 className="login-title">Sign In</h2>
 				{message && (
-					<div className={`p-3 mb-4 text-sm text-center rounded ${message.includes('success') ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}`}>
+					<div className={`message ${message.includes('success') ? 'success' : 'error'}`}>
 						{message}
 					</div>
 				)}
