@@ -1,5 +1,5 @@
 // Login.jsx
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Login.css';
 
@@ -8,6 +8,19 @@ export default function Login() {
 	const [password, setPassword] = useState('');
 	const [message, setMessage] = useState('');
 	const navigate = useNavigate(); // ✅ Initialize
+
+	useEffect(() => {
+		const handlePopState = () => {
+			console.log('Back button pressed');
+			navigate('/', { replace: true }); // 👈 force redirect to /home
+		};
+	
+		window.addEventListener('popstate', handlePopState);
+	
+		return () => {
+			window.removeEventListener('popstate', handlePopState);
+		};
+	}, []);
 
 	const handleLogin = async (e) => {
 		e.preventDefault(); // Prevent form from reloading the page
@@ -23,7 +36,6 @@ export default function Login() {
 			});
 
 			const data = await response.json();
-
 			if (response.ok) {
 				setMessage('Login successful!');
 				console.log('Login success:', data);
@@ -45,7 +57,7 @@ export default function Login() {
 			<div className="login-card">
 				<h2 className="login-title">Sign In</h2>
 				{message && (
-					<div className={`p-3 mb-4 text-sm text-center rounded ${message.includes('success') ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}`}>
+					<div className={`message ${message.includes('success') ? 'success' : 'error'}`}>
 						{message}
 					</div>
 				)}
