@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './BlogBody.css';
+import avatar from '../assets/avatar.png';
 import { ThumbsUp, ThumbsDown, User, Briefcase, MessageCircle, AlertCircle, X } from 'lucide-react';
 
 const BlogBody = () => {
@@ -219,7 +220,7 @@ const BlogBody = () => {
       <div className="user-profile-section">
         <div className="profile-card">
           <div className="profile-header">
-            <img src={userData.profilePic} alt="Profile" className="profile-pic" />
+            <img src={avatar} alt="Profile" className="profile-pic" />
             <h2 className="user-name">{userData.name}</h2>
             <p className="user-position">{userData.position}</p>
             <div className="company-info">
@@ -282,7 +283,7 @@ const BlogBody = () => {
             .map(article => (
               <article key={article.id} className="blog-card">
                 <div className="article-header">
-                  <img src={article.authorPic} alt={article.author} className="author-pic" />
+                  <img src={avatar} alt={article.author} className="author-pic" />
                   <div className="article-meta">
                     <h3 className="author-name">{article.author}</h3>
                     <p className="author-role">{article.authorRole}</p>

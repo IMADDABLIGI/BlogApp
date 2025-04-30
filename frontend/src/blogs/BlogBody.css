@@ -6,6 +6,7 @@
     width: 100%;
     padding: 20px;
     box-sizing: border-box;
+    max-width: 1400px;
   }
   
   /* Left Side - User Profile */
