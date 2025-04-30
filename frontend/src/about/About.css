@@ -25,6 +25,7 @@
     max-width: 1200px;
     margin: 0 auto;
     gap: 2.5rem;
+    color: black;
   }
   
   .styled-heading {
