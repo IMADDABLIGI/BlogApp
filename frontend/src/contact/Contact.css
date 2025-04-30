@@ -1,0 +1,175 @@
+.contact-section {
+    justify-content: center;
+    background-image: linear-gradient(
+        rgba(255, 255, 255, 0.95),
+        rgba(255, 255, 255, 0.95)
+      ),
+      url('https://images.unsplash.com/photo-1581091012184-7b71e9c37da7?auto=format&fit=crop&w=1400&q=80');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding: 3rem 1rem;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .contact-container {
+    max-width: 1100px;
+    width: 100%;
+    font-weight:bold;
+    background: white;
+    display: flex;
+    flex-direction: column;
+    border-radius: 1rem;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+    overflow: hidden;
+  }
+  
+  @media (min-width: 768px) {
+    .contact-container {
+
+        
+      flex-direction: row;
+    }
+  }
+  
+  .contact-left,
+  .contact-right {
+    font-weight:bold;
+    flex: 1;
+    padding: 2rem;
+  }
+  
+  .contact-title {
+    font-size: 1.8rem;
+    font-weight:bold;
+    margin-bottom: 2rem;
+    color: #111827;
+  }
+  
+  .contact-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1.25rem;
+    font-size: 1rem;
+    color: #374151;
+  }
+  
+  .icon {
+    color: #4f46e5;
+  }
+  
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+  
+  .form-row {
+    display: flex;
+    gap: 1rem;
+  }
+  
+  .form-row.full-width {
+    flex-direction: column;
+  }
+  
+  .contact-form input,
+  .contact-form textarea {
+    flex: 1;
+    padding: 0.75rem 1rem;
+    border: 1px solid #d1d5db;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    background-color: white;        /* ✅ Fond blanc */
+    color: #111827;                 /* ✅ Texte foncé pour lisibilité */
+  }
+  .contact-section {
+    background-image: linear-gradient(
+        rgba(255, 255, 255, 0.94),
+        rgba(255, 255, 255, 0.94)
+      ),
+      url("https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1400&q=80");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding: 3rem 1rem;
+    display: flex;
+    justify-content: center;
+  }
+  .contact-right {
+    flex: 1;
+    padding: 2rem;
+    background-image: linear-gradient(
+        rgba(255, 255, 255, 0.95),
+        rgba(255, 255, 255, 0.95)
+      ),
+      url("https://images.unsplash.com/photo-1588776814546-ec7e9c1c9bb8?auto=format&fit=crop&w=1400&q=80");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+  .contact-form input:hover,
+.contact-form textarea:hover {
+  border-color: #38bdf8; /* bleu ciel */
+  transform: scale(1.02);
+  transition: all 0.25s ease-in-out;
+  box-shadow: 0 0 5px rgba(56, 189, 248, 0.5); /* optionnel */
+}
+.contact-form input,
+.contact-form textarea {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  border: 2px solid darkblue; /* bordure un peu plus large */
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  background-color: white;
+  transition: all 0.25s ease-in-out;
+}
+
+.contact-form input:hover,
+.contact-form textarea:hover {
+  border-color:darkblue; /* bleu ciel */
+  box-shadow: 0 0 8px rgba(56, 189, 248, 0.5); /* lueur autour du cadre */
+  transform: scale(1.03); /* effet d’agrandissement doux */
+}
+.contact-form button {
+    padding: 0.75rem;
+    background-color: darkblue; /* bleu ciel */
+    color: white;
+    font-size: 1rem;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+  }
+  
+  .contact-form button:hover {
+    background-color:blue; /* bleu ciel un peu plus foncé */
+    transform: scale(1.05); /* petit effet d’agrandissement */
+    box-shadow: 0 4px 12px rgba(14, 165, 233, 0.4);
+  }
+  .contact-form button {
+    width: 50%;
+    align-self: center; /* centre le bouton dans le formulaire */
+    padding: 1rem;
+    background-color: #38bdf8;
+    color: white;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 0.75rem;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+  }
+  
+  .contact-form button:hover {
+    background-color: #0ea5e9;
+    transform: scale(1.05);
+    box-shadow: 0 6px 16px rgba(14, 165, 233, 0.4);
+  }
+  body {
+    display :flex;
+    justify-content: center;
+}
