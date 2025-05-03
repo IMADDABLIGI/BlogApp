@@ -53,7 +53,7 @@ Entrepreneurship is filled with ups and downs. With InnoMinds, we aimed to creat
 
 Here's a quick look at the main blog page:
 
-![InnoMinds Blog Screenshot](frontend/src/assets/screen.jpg)
+![InnoMinds Blog Screenshot](frontend/src/assets/BlogPage.png)
 
 ---
 
