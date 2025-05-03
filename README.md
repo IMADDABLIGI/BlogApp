@@ -49,6 +49,14 @@ Entrepreneurship is filled with ups and downs. With InnoMinds, we aimed to creat
 
 ---
 
+## 📸 Blog Page Preview
+
+Here's a quick look at the main blog page:
+
+![InnoMinds Blog Screenshot](frontend/src/assets/screen.jpg)
+
+---
+
 ## 🔐 Route Protection
 
 All blog-related routes are protected and accessible only after authentication using stored JWT tokens.
